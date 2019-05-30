@@ -21,15 +21,28 @@ func main() {
 	if port == "" {
 		logger.Errorf("Empty Port Specified")
 	}
+	diagPort := os.Getenv("DIAG_PORT")
+	if diagPort == "" {
+		logger.Errorf("Empty Diagnostics Port Specified")
+	}
 	router := mux.NewRouter()
 
+	routerInternal := mux.NewRouter()
+
 	router.HandleFunc("/", internal.WrapLogger(logger, internal.HomeHandler))
-	router.HandleFunc("/healthz", internal.WrapLogger(logger, internal.HealthHandler))
-	router.HandleFunc("/readyz", internal.WrapLogger(logger, internal.ReadyHandler))
+	routerInternal.HandleFunc("/healthz", internal.WrapLogger(logger, internal.HealthHandler))
+	routerInternal.HandleFunc("/readyz", internal.WrapLogger(logger, internal.ReadyHandler))
 
 	server := http.Server{
 		Addr:    net.JoinHostPort("", port),
 		Handler: router,
 	}
+
+	serverInternal := http.Server{
+		Addr:    net.JoinHostPort("", diagPort),
+		Handler: routerInternal,
+	}
+	// Do Something Dirty for now
+	go serverInternal.ListenAndServe()
 	server.ListenAndServe()
 }
