@@ -9,7 +9,7 @@ RUN mkdir -p /app
 ADD . /app
 WORKDIR /app
 
-RUN CGO_ENABLED=1 make build
+RUN CGO_ENABLED=0 go build -o tenerife-ws ./cmd/tenerife-ws
 
 FROM scratch
 
