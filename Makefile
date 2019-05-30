@@ -2,7 +2,7 @@ RELEASE?=0.1.0
 
 .PHONY: test
 test:
-	go test --race ./...
+	go test ./...
 
 .PHONY: build
 build:
