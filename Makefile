@@ -1,3 +1,4 @@
+RELEASE?=0.1.0
 
 .PHONY: test
 test:
@@ -14,4 +15,4 @@ clean:
 
 .PHONY: docker
 docker:
-	docker build -t tenerife-ws .
+	docker build -t tenerife-ws:${RELEASE} .
