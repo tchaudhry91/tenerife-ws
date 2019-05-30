@@ -2,6 +2,9 @@
 
 version: '2'
 
+env:
+  GO111MODULE: on
+
 tasks:
   test:
     cmds:
@@ -9,3 +12,6 @@ tasks:
   build:
     cmds:
       - go build ./cmd/tenerife-ws
+  clean:
+    cmds:
+      - rm tenerife-ws
