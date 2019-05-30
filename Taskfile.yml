@@ -1,0 +1,11 @@
+# https://taskfile.dev
+
+version: '2'
+
+tasks:
+  test:
+    cmds:
+      - go test --race ./...
+  build:
+    cmds:
+      - go build ./cmd/tenerife-ws
