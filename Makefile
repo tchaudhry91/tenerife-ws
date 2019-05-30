@@ -3,6 +3,6 @@
 test:
 	go test --race ./...
 
-.PHONE: build
+.PHONY: build
 build:
 	go build -o tenerife-ws ./cmd/tenerife-ws
