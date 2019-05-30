@@ -9,7 +9,7 @@ RUN mkdir -p /app
 ADD . /app
 WORKDIR /app
 
-RUN CGO_ENABLED=0 make build
+RUN CGO_ENABLED=1 make build
 
 FROM scratch
 
